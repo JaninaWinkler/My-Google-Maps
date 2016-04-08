@@ -20,7 +20,13 @@ function initMap() {
     marker.addListener('click', function(){
       infowindow.open(map, marker);
     });
+    var tableData = $('<tr>' + '<td>' + '<input type="checkbox" checked="checked">' + '</td>' + '<td>' + title + '</td>' + '</tr>');
+    $('#table').append(tableData);
+    tableData.change(function(e){
+      marker.setVisible(e.target.checked);
+    });
   };
+
 
   makeMarker(49.3722894, -123.0994869, 'Grouse Mountain', 'Such a cool place to hang out, go for  hike and enjoy beautiful scenery.');
   makeMarker(49.2499076, -123.0540892, 'My Apartment', 'Very chill place to relax, do yoga and play music.');
@@ -29,7 +35,6 @@ function initMap() {
   makeMarker(49.2691439, -123.0718541, 'Grandview Park', 'Crazy hippie hangout with very interesting people-watching.');
 
   if (navigator.geolocation) {
-    debugger
     navigator.geolocation.getCurrentPosition(function(position) {
       var pos = {
         lat: position.coords.latitude,
@@ -48,6 +53,7 @@ function initMap() {
 
   function handleLocationError(browserHasGeolocation, infoWindow, pos) {
     userInfoWindow.setPosition(pos);
+
     userInfoWindow.setContent(browserHasGeolocation ?
       'Error: The Geolocation service failed.' :
       'Error: Your browser doesn\'t support geolocation.');
