@@ -3,6 +3,10 @@
   <head>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
+    <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script type="text/javascript" src="/WebContent/resources/scripts/global.js"></script>
+    <script src="api.js"></script>
+    <script type="text/javascript" src="map.js"></script>
     <title>Simple markers</title>
     <style>
       html, body {
@@ -11,20 +15,27 @@
         padding: 0;
       }
       #map {
-        height: 100%;
+        height: 75%;
+        width: 75%;
+      }
+
+      #table {
+        border: 1px solid black; 
+        width: 100%;
       }
     </style>
   </head>
   <body>
+  <h1>My Favorite Places in Vancouver</h1>
     <div id="map"></div>
-
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjna8vxnHdBvwfAtMTfaUTTqg-Ep-qs5Q  
-&callback=initMap">
-    </script>
-    <script type="text/javascript" src="/WebContent/resources/scripts/global.js"></script>
-    <script type="text/javascript" src="map.js"></script>
-
+    <table id="table">
+      <tr>
+        <td><input type="checkbox"></td>
+      </tr>
+      <tr>
+        <td></td>
+      </tr>
+    </table>
   </body>
 </html>
 

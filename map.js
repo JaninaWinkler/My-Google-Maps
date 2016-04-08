@@ -5,6 +5,9 @@ function initMap() {
     center: homeLatLng
   });
 
+  var userInfoWindow = new google.maps.InfoWindow({map: map});
+
+
   function makeMarker(latitude, longitude, title, content) {
     var marker = new google.maps.Marker({
       position: {lat: latitude, lng: longitude},
@@ -25,5 +28,30 @@ function initMap() {
   makeMarker(49.3017049, -123.1417003, 'Stanley Park', 'No words can describe the endless beauty of this place.');
   makeMarker(49.2691439, -123.0718541, 'Grandview Park', 'Crazy hippie hangout with very interesting people-watching.');
 
+  if (navigator.geolocation) {
+    debugger
+    navigator.geolocation.getCurrentPosition(function(position) {
+      var pos = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+      };
+
+      userInfoWindow.setPosition(pos);
+      userInfoWindow.setContent('Location found.');
+      map.setCenter(pos);
+    }, function() {
+      handleLocationError(true, userInfoWindow, map.getCenter());
+    });
+  } else {
+    handleLocationError(false, userInfoWindow, map.getCenter());
+  }
+
+  function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+    userInfoWindow.setPosition(pos);
+    userInfoWindow.setContent(browserHasGeolocation ?
+      'Error: The Geolocation service failed.' :
+      'Error: Your browser doesn\'t support geolocation.');
+  }
 }
+
 
